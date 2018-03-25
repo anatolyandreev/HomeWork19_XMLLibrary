@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.example.org/library-schema" xmlns="http://www.example.org/library-schema"
+	elementFormDefault="qualified">
+
+	<xs:complexType name="library">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="periodic" type="periodic_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:attributeGroup name="periodic_attributes_group">
+		<xs:attribute name="is-takable">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="home|reading-room|all" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="available-number" type="xs:int" />
+	</xs:attributeGroup>
+
+	<xs:complexType name="periodic_type">
+		<xs:sequence>
+			<xs:element name="magazine" type="magazine_type"
+				maxOccurs="unbounded" minOccurs="0" />
+			<xs:element name="paper" type="paper_type" maxOccurs="unbounded"
+				minOccurs="0" />
+			<xs:element name="book" type="book_type" maxOccurs="unbounded"
+				minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="is-taken_type">
+		<xs:choice>
+			<xs:element name="readingroom" />
+			<xs:element name="false" />
+			<xs:element name="home" type="taken-home_type" />
+		</xs:choice>
+	</xs:complexType>
+
+	<xs:complexType name="taken-home_type">
+		<xs:sequence>
+			<xs:element name="max-expire-days">
+				<xs:simpleType>
+					<xs:restriction base="xs:int">
+						<xs:pattern value="[1-9]" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="magazine_type">
+		<xs:sequence>
+			<xs:element name="is-taken" type="is-taken_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="paper_type">
+		<xs:sequence>
+			<xs:element name="is-taken" type="is-taken_type" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="book_type">
+		<xs:sequence>
+			<xs:element name="is-taken" type="is-taken_type" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

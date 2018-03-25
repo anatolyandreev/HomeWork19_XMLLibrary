@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<library xmlns="http://www.example.org/library-schema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="library-schema.xsd">
+	<periodic>
+		<magazine is-takable="all" available-number="35">
+			<is-taken>
+				<readingroom />
+			</is-taken>
+		</magazine>
+
+		<paper is-takable="reading-room" available-number="10">
+			<is-taken>
+				<readingroom />
+			</is-taken>
+		</paper>
+
+		<book is-takable="home" avalable-number="10">
+			<is-taken>
+				<home>
+					<max-expire-days>3</max-expire-days>
+				</home>
+			</is-taken>
+		</book>
+
+		<book is-takable="all" available-number="20">
+			<is-taken>
+				<false />
+			</is-taken>
+		</book>
+	</periodic>
+</library>
